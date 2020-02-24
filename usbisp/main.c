@@ -324,7 +324,11 @@ int main(int argc, char **argv)
 
 		fseek(fp, 0, SEEK_SET);
 
-		fread(file_buffer, 1, file_length, fp);
+		if (fread(file_buffer, 1, file_length, fp) != file_length)
+        {
+			fprintf(stderr, "Failed to read binary file!\n");
+			exit(1);
+		}
 
 		fclose(fp);
 		fp = 0;
@@ -585,7 +589,12 @@ int main(int argc, char **argv)
 		printf("Data flash Binary length %d\n", file_length);
 		fseek(fp, 0, SEEK_SET);
 
-		fread(file_buffer, 1, file_length, fp);
+		if (fread(file_buffer, 1, file_length, fp) != file_length)
+		{
+			fprintf(stderr, "Failed to read binary file!\n");
+			exit(1);
+		}
+
 		fclose(fp);
 		fp = 0;
 

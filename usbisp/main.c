@@ -327,6 +327,18 @@ int main(int argc, char **argv)
 		if (fread(file_buffer, 1, file_length, fp) != file_length)
         {
 			fprintf(stderr, "Failed to read binary file!\n");
+
+			free(file_buffer);
+			fclose(fp);
+
+			if (devh)
+			{
+				libusb_release_interface(devh, 0);
+				libusb_close(devh);
+			}
+
+			libusb_exit(NULL);
+
 			exit(1);
 		}
 
@@ -592,6 +604,18 @@ int main(int argc, char **argv)
 		if (fread(file_buffer, 1, file_length, fp) != file_length)
 		{
 			fprintf(stderr, "Failed to read binary file!\n");
+
+			free(file_buffer);
+			fclose(fp);
+
+			if (devh)
+			{
+				libusb_release_interface(devh, 0);
+				libusb_close(devh);
+			}
+
+			libusb_exit(NULL);
+
 			exit(1);
 		}
 
